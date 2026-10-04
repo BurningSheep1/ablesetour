@@ -1422,6 +1422,17 @@ function vanTexture(){
   return t;
 }
 const VAN_TEX=vanTexture();
+function roofTexture(){
+  const cv=document.createElement('canvas');cv.width=512;cv.height=200;const x=cv.getContext('2d');
+  const draw=()=>{
+    x.clearRect(0,0,512,200);x.textAlign='center';x.textBaseline='middle';x.font='150px "Lilita One", "Arial Black", sans-serif';
+    x.lineJoin='round';x.lineWidth=14;x.strokeStyle='#2c6e38';x.strokeText('ABM',256,108);x.fillStyle='#ffffff';x.fillText('ABM',256,108);
+  };
+  draw();const t=new THREE.CanvasTexture(cv);t.anisotropy=4;
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{draw();t.needsUpdate=true;});
+  return t;
+}
+const ROOF_TEX=roofTexture();
 function buildVan(lv,x,z){const v=vanModel(lv.disp);v.position.set(x+.6,0,z);lv.grp.add(v);lv.van=v;}
 
 /* ---------- Stadtverkehr: Fahrlevel (Stadt, Baustelle, Hafen, Altstadt) ---------- */
@@ -1503,16 +1514,19 @@ function makeTruck(lv,style){
   [.85,-.85].forEach(b=>add(g,boxGeo(.05,.2,.3),m.tail,-3.27,.7,b,false));
   return {g,...m,beacon,drum};
 }
-function vanModel(disp){
+function vanModel(disp,roof){
   const v=new THREE.Group();
   mBox(v,3.0,1.35,1.45,0x3f9a4f,-.3,.95,0);
   mBox(v,.95,.95,1.42,0x3f9a4f,1.62,.75,0);
   mBox(v,.06,.42,1.2,0x2b3d44,2.1,1.0,0,false);
   mBox(v,.5,.4,.02,0x2b3d44,1.6,1.0,.72,false);
   mBox(v,3.95,.12,1.47,0xf4f6f5,.17,.36,0);
-  mBox(v,.3,.12,.3,0xff7a1a,-.3,1.69,0);
+  mBox(v,.3,.12,.3,0xff7a1a,roof?.95:-.3,1.69,0);
   const logo=new THREE.Mesh(new THREE.PlaneGeometry(2.6,.81),new THREE.MeshLambertMaterial({map:VAN_TEX}));
   logo.position.set(-.3,1.05,.731);v.add(logo);disp.push(logo.geometry,logo.material);
+  const logo2=new THREE.Mesh(logo.geometry,logo.material);logo2.position.set(-.3,1.05,-.731);logo2.rotation.y=Math.PI;v.add(logo2);
+  if(roof){const r=new THREE.Mesh(new THREE.PlaneGeometry(2.3,.9),new THREE.MeshLambertMaterial({map:ROOF_TEX,transparent:true}));
+    r.rotation.x=-Math.PI/2;r.position.set(-.55,1.63,0);v.add(r);disp.push(r.geometry,r.material);}
   [[-1.2,.74],[1.4,.74],[-1.2,-.74],[1.4,-.74]].forEach(([a,b])=>{const w=mCyl(v,.32,.32,.22,0x1f2426,a,.32,b);w.rotation.x=Math.PI/2;});
   return v;
 }
@@ -2041,7 +2055,7 @@ function buildCity(lv){
   C.bays.forEach(b=>{const c=ptype==='dock'?newVeh(C,lv,'truck',0,'box'):newVeh(C,lv,'car',CAR_COLS[Math.floor(R()*CAR_COLS.length)]);
     c.parked=true;c.x=b.x;c.z=b.z;c.h=b.face.slice();c.bay=b;b.car=c;placeVeh(c,0,true);});
   /* Der eigene Transporter */
-  const vg=new THREE.Group();g.add(vg);const vm=vanModel(lv.disp);vm.position.x=-.15;vg.add(vm);
+  const vg=new THREE.Group();g.add(vg);const vm=vanModel(lv.disp,true);vm.position.x=-.15;vg.add(vm);
   const brake=new THREE.MeshBasicMaterial({color:C.tailOff});lv.disp.push(brake);
   [.5,-.5].forEach(b=>{add(vm,boxGeo(.05,.16,.28),brake,-1.83,.62,b,false);mBox(vm,.04,.14,.3,0xfff6d0,2.11,.62,b,false);});
   if(C.night)addBeam(vg,1.9,8.5,4.6);
