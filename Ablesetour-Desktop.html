@@ -807,7 +807,7 @@ function buildLevel(i){
   const g=L.map.map(r=>r.padEnd(W,' ').split(''));
   const rows=g.length, cols=W;
   const grp=new THREE.Group();scene.add(grp);
-  const lv={i,L,g,rows,cols,grp,tasks:[],clutter:[],coffee:[],spikes:[],npcs:[],disp:[],exit:null,counts:{W:0,H:0,R:0,G:0,L:0}};
+  const lv={i,L,g,rows,cols,grp,tasks:[],clutter:[],coffee:[],spikes:[],npcs:[],disp:[],exit:null,counts:{W:0,H:0,R:0,G:0,L:0,P:0}};
 
   /* Grundstück als Diorama */
   const x0=-2.5*T,x1=(cols+1.5)*T,z0=-2.5*T,z1=(rows+2.5)*T;
@@ -2332,7 +2332,7 @@ const screens=['scrMenu','scrBrief','scrPause','scrResult'];
 function show(id){screens.forEach(s=>$(s).hidden=s!==id);}
 function fmt(t){t=Math.max(0,t);const m=Math.floor(t/60),s=t-m*60;return m+':'+(s<10?'0':'')+s.toFixed(1).replace('.',',');}
 function rank(total,par){return total<=par[0]?{n:'Meister',c:'#36b86c'}:total<=par[1]?{n:'Geselle',c:'#17a59b'}:total<=par[2]?{n:'Azubi',c:'#ff7a1a'}:{n:'Praktikant',c:'#e5483b'};}
-function unlocked(i){return i===0||!!LEVELS[i].special||BEST[LEVELS[i-1].id]!==undefined;}
+function unlocked(i){return true;}
 
 function renderMenu(){
   $('houseList').innerHTML=LEVELS.map((L,i)=>{
@@ -2498,7 +2498,7 @@ function completeTask(t){
     floater('Piep! Funktioniert','fl-good',t.x,2.5,t.z,{life:1.3});
   }
   if(level.crib){if(t.k==='R')addNoise(.55*(.3+.7*noiseAt(t.x,t.z)));else if(t.k==='H')addNoise(.12*noiseAt(t.x,t.z));}
-  const total=KINDS.reduce((a,k)=>a+level.counts[k],0), sum=KINDS.reduce((a,k)=>a+S.done[k],0);
+  const total=KINDS.reduce((a,k)=>a+(level.counts[k]||0),0), sum=KINDS.reduce((a,k)=>a+(S.done[k]||0),0);
   if(sum>=total&&!S.allDone){S.allDone=true;sfx.all();toast('Alles erledigt. Ab zum Transporter!',2600);}
 }
 function penalty(sec,x,z,label){
