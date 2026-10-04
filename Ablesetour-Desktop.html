@@ -341,10 +341,10 @@ const LEVELS=[
    {kind:'frau',path:[[7,2],[7,17]],speed:1.5,mode:'ping'},
    {kind:'kid',path:[[8,1],[8,17]],speed:3.3,mode:'ping'},
    {kind:'mann',path:[[2,7],[2,11],[5,11],[5,7]],speed:1.7,mode:'loop'}]},
-{ id:9, name:'Marktstraße 5', type:'Innenstadt im Feierabendverkehr', par:[65,90,130], special:true, drive:true,
+{ id:9, name:'Stadtfahrt', type:'Innenstadt im Feierabendverkehr', par:[65,90,130], special:true, drive:true,
   note:'Heute geht es mit dem Transporter in die Innenstadt, mitten in den Feierabendverkehr. Halte an roten Ampeln, an zwei Kreuzungen stehen Blitzer. Lass Fußgänger über den Zebrastreifen und überhol die Müllabfuhr nur, wenn frei ist. In der Marktstraße ist alles zugeparkt: Warte, bis jemand rausfährt, und schnapp dir die Lücke, bevor es ein anderer tut. W gibt Gas, S bremst und fährt rückwärts, A und D lenken. Zum Parken in der grünen Lücke stehen bleiben und Leertaste halten.',
   startToast:'Ab in die Marktstraße! Folge dem Pfeil',
-  city:{n:4,theme:'city',start:{i:0,j:3,d:'E',t:7},blocks:['HHM','HHH','HPH'],park:{type:'par',j:1,i0:1,i1:3,sides:'ns',len:6.33},
+  city:{seed:13,n:4,theme:'city',start:{i:0,j:3,d:'E',t:7},blocks:['HHM','HHH','HPH'],park:{type:'par',j:1,i0:1,i1:3,sides:'ns',len:6.33},
     blitz:[[2,2],[1,1]],zebra:[{i:2,z:70},{j:2,x:42},{i:1,z:42}],cars:26,buses:2,trucks:1,truckStyle:'garbage',seekers:2}},
 { id:2, name:'Am Schlossberg 7', type:'Altbau, 5er WG', par:[110,150,200],
   note:'Fünf Mitbewohner, ein Hund, kein Putzplan. Und Frau Huber von unten hat Kuchen gebacken. Erwischt sie dich, gibt es drei Sekunden Kaffeepause.',
@@ -394,10 +394,10 @@ const LEVELS=[
    {kind:'cat',fur:0xd9893b,path:[[8,1],[8,17]],speed:3.0,mode:'ping'},
    {kind:'cat',fur:0x8a8f93,path:[[1,13],[1,17],[5,17],[5,13]],speed:2.2,mode:'loop'},
    {kind:'cat',fur:0x2b2b2b,path:[[10,8],[11,11]],speed:2.4,mode:'ping'}]},
-{ id:10, name:'Rathausplatz 1', type:'Großbaustelle zur Rushhour', par:[90,125,175], special:true, drive:true,
+{ id:10, name:'Baustellenfahrt', type:'Großbaustelle zur Rushhour', par:[90,125,175], special:true, drive:true,
   note:'Die halbe Stadt ist aufgerissen. Gesperrte Straßen zwingen dich zu Umwegen, und an den Baustellen ist nur eine Spur frei: Dort regelt eine Baustellenampel den Gegenverkehr, und wer bei Rot reinfährt, steht plötzlich vor einem Betonmischer. Dazu Rushhour, drei Blitzer und am Rathaus nur Querparkplätze. Drei andere suchen auch, und die Lücken sind eng.',
   startToast:'Rushhour! Sperrungen umfahren, Baustellenampeln beachten',
-  city:{n:5,theme:'site',start:{i:0,j:4,d:'E',t:7},blocks:['HSHR','SHPH','HHSH','PSHH'],
+  city:{seed:14,n:5,theme:'site',start:{i:0,j:4,d:'E',t:7},blocks:['HSHR','SHPH','HHSH','PSHH'],
     park:{type:'perp',j:1,i0:2,i1:4,sides:'n',len:5.4,w:2.9,tol:.9},
     work:[{i:2,j:4,d:'N'},{i:1,j:2,d:'E'},{i:3,j:3,d:'N'}],closed:[{i:1,j:4,d:'N'},{i:3,j:1,d:'S'},{i:2,j:2,d:'N'}],
     blitz:[[2,3],[3,2],[1,1]],zebra:[{j:3,x:14},{i:2,z:70},{j:1,x:42}],cars:38,buses:3,trucks:4,truckStyle:'mixer',seekers:3,fast:1.1,mercy:32}},
@@ -448,10 +448,10 @@ const LEVELS=[
    {kind:'rat',path:[[8,1],[8,19]],speed:3.6,mode:'ping'},
    {kind:'rat',path:[[7,19],[7,1]],speed:3.0,mode:'ping'},
    {kind:'rat',path:[[10,7],[13,7]],speed:2.5,mode:'ping'}]},
-{ id:11, name:'Am Kai 7', type:'Containerhafen im Regen', par:[75,105,150], special:true, drive:true,
+{ id:11, name:'Hafenfahrt', type:'Containerhafen im Regen', par:[75,105,150], special:true, drive:true,
   note:'Dauerregen am Hafen: Auf nasser Straße rutscht der Transporter in Kurven und der Bremsweg wird länger. Güterzüge rollen quer durchs Hafengelände. Gehen die Schranken runter, heißt es warten, denn wer vom Zug erwischt wird, verliert zehn Sekunden. Am Kühlhaus sind alle Laderampen von Lastern belegt. Wird eine frei, musst du rückwärts ranfahren.',
   startToast:'Regen und Güterzüge! Am Kühlhaus rückwärts an die Rampe',
-  city:{n:4,theme:'harbor',grip:.6,weather:'rain',start:{i:3,j:3,d:'W',t:7},blocks:['KTW','CTW','WTC'],rail:{x:42},
+  city:{seed:8,n:4,theme:'harbor',grip:.6,weather:'rain',start:{i:3,j:3,d:'W',t:7},blocks:['KTW','CTW','WTC'],rail:{x:42},
     park:{type:'dock',j:1,i0:0,i1:1,sides:'n',len:7.4,w:3.8,tol:1},
     blitz:[[2,2],[1,3]],zebra:[{i:2,z:42},{j:2,x:70}],cars:18,buses:1,trucks:10,truckStyle:'box',seekers:0}},
 { id:6, name:'Birkenallee 9', type:'Doppelhaushälfte, Baby schläft', par:[120,160,220], special:true,
@@ -511,10 +511,10 @@ const LEVELS=[
   npcs:[
    {kind:'robot',path:[[4,5]],speed:1.3,mode:'bounce'},
    {kind:'robot',path:[[8,10]],speed:1.5,mode:'bounce'}]},
-{ id:12, name:'Domplatz 3', type:'Altstadt bei Nacht im Schnee', par:[75,105,150], special:true, drive:true,
+{ id:12, name:'Weihnachtsfahrt', type:'Altstadt bei Nacht im Schnee', par:[75,105,150], special:true, drive:true,
   note:'Heiligabend, kurz vor Ladenschluss. Es ist dunkel, es schneit, und die Gassen sind spiegelglatt: Gas geben, lenken und bremsen nur mit Gefühl. Räumfahrzeuge schleichen vor dir her, am Weihnachtsmarkt laufen ständig Leute über die Zebrastreifen, und drei Kreuzungen werden geblitzt. Am Dom sind die Parklücken knapp bemessen, und drei andere suchen auch.',
   startToast:'Glatteis bei Nacht! Sanft bremsen, früh lenken',
-  city:{n:4,theme:'oldtown',grip:.4,weather:'snow',night:true,start:{i:0,j:3,d:'E',t:7},blocks:['ODO','OXO','OPO'],
+  city:{seed:10,n:4,theme:'oldtown',grip:.4,weather:'snow',night:true,start:{i:0,j:3,d:'E',t:7},blocks:['ODO','OXO','OPO'],
     park:{type:'par',j:1,i0:1,i1:3,sides:'ns',len:5.7,tol:.85},
     blitz:[[1,2],[2,2],[2,1]],zebra:[{i:1,z:42},{i:2,z:42},{j:2,x:42},{j:2,x:70},{i:2,z:70}],peds:3,pedWait:[1.5,5],
     cars:22,buses:1,trucks:2,truckStyle:'plow',seekers:3,mercy:32}},
@@ -1413,7 +1413,7 @@ function vanTexture(){
   const cv=document.createElement('canvas');cv.width=512;cv.height=160;const x=cv.getContext('2d');
   const draw=()=>{
     x.clearRect(0,0,512,160);x.fillStyle='#3f9a4f';x.fillRect(0,0,512,160);
-    x.fillStyle='#f4f6f5';x.fillRect(0,104,512,26);x.fillStyle='#ff7a1a';x.fillRect(0,130,512,10);
+    x.fillStyle='#f4f6f5';x.fillRect(0,104,512,26);x.fillStyle='#2c6e38';x.fillRect(0,130,512,10);
     x.fillStyle='#ffffff';x.textBaseline='alphabetic';x.font='88px "Lilita One", "Arial Black", sans-serif';x.fillText('ABM',24,86);
     x.font='600 26px "Barlow Condensed", "Arial Narrow", sans-serif';x.fillStyle='#dff2e2';x.fillText('MESSDIENST · WASSER · WÄRME · RAUCH',26,100);
   };
@@ -1521,12 +1521,11 @@ function vanModel(disp,roof){
   mBox(v,.06,.42,1.2,0x2b3d44,2.1,1.0,0,false);
   mBox(v,.5,.4,.02,0x2b3d44,1.6,1.0,.72,false);
   mBox(v,3.95,.12,1.47,0xf4f6f5,.17,.36,0);
-  mBox(v,.3,.12,.3,0xff7a1a,roof?.95:-.3,1.69,0);
   const logo=new THREE.Mesh(new THREE.PlaneGeometry(2.6,.81),new THREE.MeshLambertMaterial({map:VAN_TEX}));
   logo.position.set(-.3,1.05,.731);v.add(logo);disp.push(logo.geometry,logo.material);
   const logo2=new THREE.Mesh(logo.geometry,logo.material);logo2.position.set(-.3,1.05,-.731);logo2.rotation.y=Math.PI;v.add(logo2);
-  if(roof){const r=new THREE.Mesh(new THREE.PlaneGeometry(2.3,.9),new THREE.MeshLambertMaterial({map:ROOF_TEX,transparent:true}));
-    r.rotation.x=-Math.PI/2;r.position.set(-.55,1.63,0);v.add(r);disp.push(r.geometry,r.material);}
+  if(roof){const r=new THREE.Mesh(new THREE.PlaneGeometry(2.6,1.0),new THREE.MeshLambertMaterial({map:ROOF_TEX,transparent:true}));
+    r.rotation.x=-Math.PI/2;r.position.set(-.3,1.63,0);v.add(r);disp.push(r.geometry,r.material);}
   [[-1.2,.74],[1.4,.74],[-1.2,-.74],[1.4,-.74]].forEach(([a,b])=>{const w=mCyl(v,.32,.32,.22,0x1f2426,a,.32,b);w.rotation.x=Math.PI/2;});
   return v;
 }
@@ -1897,7 +1896,7 @@ function updateRail(C,dt){
 
 /* Stadt aufbauen */
 function buildCity(lv){
-  const L=lv.L,cfg=L.city,g=lv.grp,R=mulberry(4242+L.name.length*131),n=cfg.n||4,B=28,max=(n-1)*B,E=13,theme=cfg.theme||'city';
+  const L=lv.L,cfg=L.city,g=lv.grp,R=mulberry(4242+(cfg.seed||L.name.length)*131),n=cfg.n||4,B=28,max=(n-1)*B,E=13,theme=cfg.theme||'city';
   const C={n,B,max,E,theme,grip:cfg.grip||1,night:!!cfg.night,snowy:cfg.weather==='snow',wet:cfg.weather==='rain',fast:cfg.fast||1,
     pedWait:cfg.pedWait||[3,8],mercy:cfg.mercy||28,railX:cfg.rail?cfg.rail.x:null,
     nodes:[],veh:[],peds:[],walkers:[],bays:[],blocks:[],dyn:[],bldg:[],shut:{},rails:[],works:[],anim:[],train:null,bellT:0,
