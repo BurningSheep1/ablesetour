@@ -255,7 +255,7 @@ h1{margin:0;font-family:var(--f-display);font-weight:400;font-size:clamp(52px,16
 
 <section id="scrResult" class="screen" hidden>
   <div class="ticket">
-    <div class="stamp" id="rStamp">Meister</div>
+    <div class="stamp" id="rStamp">Obermonteur</div>
     <div class="t-head"><span>Auftrag <b id="rNo">1</b> erledigt</span></div>
     <h2 id="rAddr">Lindenweg 4</h2>
     <div class="bigtime" id="rTotal">0:00,0</div>
@@ -305,7 +305,7 @@ function svg(k){const i=ICON[k];return '<svg viewBox="0 0 24 24" aria-hidden="tr
 
 /* ---------- Häuser ---------- */
 const LEVELS=[
-{ id:0, name:'Lindenweg 4', type:'Einfamilienhaus', par:[40,58,85],
+{ id:0, name:'Lindenweg 4', type:'Einfamilienhaus', par:[35,58,85],
   note:'Familie Albers ist auf Arbeit. Hund Bruno ist zuhause und freut sich sehr über Besuch.',
   map:[
   "###############",
@@ -320,7 +320,7 @@ const LEVELS=[
   "###########D###",
   "           E   "],
   npcs:[{kind:'dog',path:[[7,7],[7,13],[8,13],[8,7]],speed:2.5,mode:'loop'}]},
-{ id:1, name:'Hafenstraße 12', type:'Mehrfamilienhaus, 2. OG', par:[75,100,140],
+{ id:1, name:'Hafenstraße 12', type:'Mehrfamilienhaus, 2. OG', par:[70,100,140],
   note:'Frau Yilmaz hat Besuch. Ihr Sohn testet seine neuen Turnschuhe im Flur.',
   map:[
   "###################",
@@ -341,12 +341,12 @@ const LEVELS=[
    {kind:'frau',path:[[7,2],[7,17]],speed:1.5,mode:'ping'},
    {kind:'kid',path:[[8,1],[8,17]],speed:3.3,mode:'ping'},
    {kind:'mann',path:[[2,7],[2,11],[5,11],[5,7]],speed:1.7,mode:'loop'}]},
-{ id:9, name:'Stadtfahrt', type:'Innenstadt im Feierabendverkehr', par:[65,90,130], special:true, drive:true,
+{ id:9, name:'Stadtfahrt', type:'Innenstadt im Feierabendverkehr', par:[60,90,130], special:true, drive:true,
   note:'Heute geht es mit dem Transporter in die Innenstadt, mitten in den Feierabendverkehr. Halte an roten Ampeln, an zwei Kreuzungen stehen Blitzer. Lass Fußgänger über den Zebrastreifen und überhol die Müllabfuhr nur, wenn frei ist. In der Marktstraße ist alles zugeparkt: Warte, bis jemand rausfährt, und schnapp dir die Lücke, bevor es ein anderer tut. W gibt Gas, S bremst und fährt rückwärts, A und D lenken. Zum Parken in der grünen Lücke stehen bleiben und Leertaste halten.',
   startToast:'Ab in die Marktstraße! Folge dem Pfeil',
   city:{seed:13,n:4,theme:'city',start:{i:0,j:3,d:'E',t:7},blocks:['HHM','HHH','HPH'],park:{type:'par',j:1,i0:1,i1:3,sides:'ns',len:6.33},
     blitz:[[2,2],[1,1]],zebra:[{i:2,z:70},{j:2,x:42},{i:1,z:42}],cars:26,buses:2,trucks:1,truckStyle:'garbage',seekers:2}},
-{ id:2, name:'Am Schlossberg 7', type:'Altbau, 5er WG', par:[110,150,200],
+{ id:2, name:'Am Schlossberg 7', type:'Altbau, 5er WG', par:[105,150,200],
   note:'Fünf Mitbewohner, ein Hund, kein Putzplan. Und Frau Huber von unten hat Kuchen gebacken. Erwischt sie dich, gibt es drei Sekunden Kaffeepause.',
   map:[
   "#####################",
@@ -372,7 +372,7 @@ const LEVELS=[
    {kind:'dog',path:[[2,7],[2,11],[5,11],[5,7]],speed:2.8,mode:'loop'},
    {kind:'frau',path:[[2,14],[2,19],[4,19],[4,14]],speed:1.6,mode:'loop'},
    {kind:'mann',path:[[12,7],[12,11]],speed:1.4,mode:'ping'}]},
-{ id:3, name:'Gartenstraße 3', type:'Messiewohnung, EG', par:[120,165,230], special:true, dirty:true,
+{ id:3, name:'Gartenstraße 3', type:'Messiewohnung, EG', par:[115,165,230], special:true, dirty:true,
   note:'Herr Krämer sammelt seit 1987. Zeitungen, Kartons, Katzen. Irgendwo dazwischen hängen die Geräte. Auf den Zeitungen kommst du nur langsam voran.',
   map:[
   "###################",
@@ -394,14 +394,14 @@ const LEVELS=[
    {kind:'cat',fur:0xd9893b,path:[[8,1],[8,17]],speed:3.0,mode:'ping'},
    {kind:'cat',fur:0x8a8f93,path:[[1,13],[1,17],[5,17],[5,13]],speed:2.2,mode:'loop'},
    {kind:'cat',fur:0x2b2b2b,path:[[10,8],[11,11]],speed:2.4,mode:'ping'}]},
-{ id:10, name:'Baustellenfahrt', type:'Großbaustelle zur Rushhour', par:[90,125,175], special:true, drive:true,
+{ id:10, name:'Baustellenfahrt', type:'Großbaustelle zur Rushhour', par:[85,125,175], special:true, drive:true,
   note:'Die halbe Stadt ist aufgerissen. Gesperrte Straßen zwingen dich zu Umwegen, und an den Baustellen ist nur eine Spur frei: Dort regelt eine Baustellenampel den Gegenverkehr, und wer bei Rot reinfährt, steht plötzlich vor einem Betonmischer. Dazu Rushhour, drei Blitzer und am Rathaus nur Querparkplätze. Drei andere suchen auch, und die Lücken sind eng.',
   startToast:'Rushhour! Sperrungen umfahren, Baustellenampeln beachten',
   city:{seed:14,n:5,theme:'site',start:{i:0,j:4,d:'E',t:7},blocks:['HSHR','SHPH','HHSH','PSHH'],
     park:{type:'perp',j:1,i0:2,i1:4,sides:'n',len:5.4,w:2.9,tol:.9},
     work:[{i:2,j:4,d:'N'},{i:1,j:2,d:'E'},{i:3,j:3,d:'N'}],closed:[{i:1,j:4,d:'N'},{i:3,j:1,d:'S'},{i:2,j:2,d:'N'}],
     blitz:[[2,3],[3,2],[1,1]],zebra:[{j:3,x:14},{i:2,z:70},{j:1,x:42}],cars:38,buses:3,trucks:4,truckStyle:'mixer',seekers:3,fast:1.1,mercy:32}},
-{ id:4, name:'Uferweg 1', type:'Atriumbungalow am Fluss', par:[85,115,160], special:true,
+{ id:4, name:'Uferweg 1', type:'Atriumbungalow am Fluss', par:[80,115,160], special:true,
   note:'Im Teich im Innenhof wohnt ein Biber, und er liebt Kupferrohre. Erreicht er einen Wasserzähler vor dir, gibt es einen Rohrbruch und das Ablesen dauert dreimal so lange. Stehst du am Zähler, traut er sich nicht ran.',
   beaver:{r:7,c:9,speed:2.7,delay:2.5},
   map:[
@@ -422,7 +422,7 @@ const LEVELS=[
   "#########D#########",
   "         E         "],
   npcs:[{kind:'mann',path:[[4,1],[4,17]],speed:1.5,mode:'ping'}]},
-{ id:5, name:'Mühlweg 21, Keller', type:'Kellergeschoss mit Heizungsraum', par:[75,105,150], special:true, dark:true, cellar:true,
+{ id:5, name:'Mühlweg 21, Keller', type:'Kellergeschoss mit Heizungsraum', par:[70,105,150], special:true, dark:true, cellar:true,
   note:'Das Licht hat einen Wackelkontakt. Lies die Heizungsanlage an drei Stellen ab (Kessel, Wärmemengenzähler, Anlagendruck), dichte den Rohrbruch ab und finde beide Wasserzähler. Im Wasser kommst du langsamer voran. Ratten, Farbeimer und Hausmeister Brandl mit Taschenlampe sind auch unterwegs.',
   heatPipes:[1,1,7],
   map:[
@@ -448,13 +448,13 @@ const LEVELS=[
    {kind:'rat',path:[[8,1],[8,19]],speed:3.6,mode:'ping'},
    {kind:'rat',path:[[7,19],[7,1]],speed:3.0,mode:'ping'},
    {kind:'rat',path:[[10,7],[13,7]],speed:2.5,mode:'ping'}]},
-{ id:11, name:'Hafenfahrt', type:'Containerhafen im Regen', par:[75,105,150], special:true, drive:true,
+{ id:11, name:'Hafenfahrt', type:'Containerhafen im Regen', par:[70,105,150], special:true, drive:true,
   note:'Dauerregen am Hafen: Auf nasser Straße rutscht der Transporter in Kurven und der Bremsweg wird länger. Güterzüge rollen quer durchs Hafengelände. Gehen die Schranken runter, heißt es warten, denn wer vom Zug erwischt wird, verliert zehn Sekunden. Am Kühlhaus sind alle Laderampen von Lastern belegt. Wird eine frei, musst du rückwärts ranfahren.',
   startToast:'Regen und Güterzüge! Am Kühlhaus rückwärts an die Rampe',
   city:{seed:8,n:4,theme:'harbor',grip:.6,weather:'rain',start:{i:3,j:3,d:'W',t:7},blocks:['KTW','CTW','WTC'],rail:{x:42},
     park:{type:'dock',j:1,i0:0,i1:1,sides:'n',len:7.4,w:3.8,tol:1},
     blitz:[[2,2],[1,3]],zebra:[{i:2,z:42},{j:2,x:70}],cars:18,buses:1,trucks:10,truckStyle:'box',seekers:0}},
-{ id:6, name:'Birkenallee 9', type:'Doppelhaushälfte, Baby schläft', par:[120,160,220], special:true,
+{ id:6, name:'Birkenallee 9', type:'Doppelhaushälfte, Baby schläft', par:[115,160,220], special:true,
   note:'Die kleine Mia ist gerade eingeschlafen. Wer in ihrer Nähe rennt, über knarzende Dielen poltert oder ein Quietscheentchen erwischt, weckt sie auf. Schleichen mit Shift (am Handy: Joystick nur leicht ziehen). Vorsicht: Auch ein geprüfter Rauchmelder piept laut. Und Dackel Hugo bellt, wenn du ihn anrempelst.',
   startToast:'Pst! Mia schläft. Shift halten zum Schleichen',
   baby:{name:'Mia',radius:7.5},
@@ -477,7 +477,7 @@ const LEVELS=[
    {kind:'mama',path:[[11,8],[11,16]],speed:1.2,mode:'ping'},
    {kind:'kid',path:[[7,2],[7,16]],speed:3.0,mode:'ping'},
    {kind:'dog',path:[[9,14],[9,16],[11,16],[11,14]],speed:2.2,mode:'loop'}]},
-{ id:7, name:'Villa Sonnenhang', type:'Smart Home mit Alarmanlage', par:[115,155,215], special:true, villa:true,
+{ id:7, name:'Villa Sonnenhang', type:'Smart Home mit Alarmanlage', par:[110,155,215], special:true, villa:true,
   note:'Familie Falk ist auf Mallorca und hat vergessen, die Alarmanlage auszuschalten. Die Lichtschranken schalten im Takt, also warte, bis sie aus sind. Die Kameras reagieren nur auf Bewegung: Erwischt dich der Lichtkegel, bleib stehen. Und die Saugroboter fahren, wohin sie wollen.',
   startToast:'Alarmanlage scharf! Im Kamerakegel stehen bleiben',
   map:[
@@ -511,14 +511,14 @@ const LEVELS=[
   npcs:[
    {kind:'robot',path:[[4,5]],speed:1.3,mode:'bounce'},
    {kind:'robot',path:[[8,10]],speed:1.5,mode:'bounce'}]},
-{ id:12, name:'Weihnachtsfahrt', type:'Altstadt bei Nacht im Schnee', par:[75,105,150], special:true, drive:true,
+{ id:12, name:'Weihnachtsfahrt', type:'Altstadt bei Nacht im Schnee', par:[70,105,150], special:true, drive:true,
   note:'Heiligabend, kurz vor Ladenschluss. Es ist dunkel, es schneit, und die Gassen sind spiegelglatt: Gas geben, lenken und bremsen nur mit Gefühl. Räumfahrzeuge schleichen vor dir her, am Weihnachtsmarkt laufen ständig Leute über die Zebrastreifen, und drei Kreuzungen werden geblitzt. Am Dom sind die Parklücken knapp bemessen, und drei andere suchen auch.',
   startToast:'Glatteis bei Nacht! Sanft bremsen, früh lenken',
   city:{seed:10,n:4,theme:'oldtown',grip:.4,weather:'snow',night:true,start:{i:0,j:3,d:'E',t:7},blocks:['ODO','OXO','OPO'],
     park:{type:'par',j:1,i0:1,i1:3,sides:'ns',len:5.7,tol:.85},
     blitz:[[1,2],[2,2],[2,1]],zebra:[{i:1,z:42},{i:2,z:42},{j:2,x:42},{j:2,x:70},{i:2,z:70}],peds:3,pedWait:[1.5,5],
     cars:22,buses:1,trucks:2,truckStyle:'plow',seekers:3,mercy:32}},
-{ id:8, name:'Hof Brandstätter', type:'Vierseithof im Januar', par:[110,150,210], special:true, snow:true,
+{ id:8, name:'Hof Brandstätter', type:'Vierseithof im Januar', par:[105,150,210], special:true, snow:true,
   note:'Minus zwölf Grad, der Innenhof ist spiegelglatt. Auf dem Eis rutschst du weiter und bremst schlecht. Grödel geben dir zehn Sekunden lang Halt. Zwei Wasserzähler im Stall sind eingefroren und brauchen doppelt so lange. Und Gans Gerda verteidigt ihr Nest gegen jeden.',
   startToast:'Glatteis! Grödel aufheben gibt Halt',
   map:[
@@ -2331,7 +2331,7 @@ const ui={hud:$('hud'),time:$('hudTime'),pen:$('hudPen'),addr:$('hudAddr'),chips
 const screens=['scrMenu','scrBrief','scrPause','scrResult'];
 function show(id){screens.forEach(s=>$(s).hidden=s!==id);}
 function fmt(t){t=Math.max(0,t);const m=Math.floor(t/60),s=t-m*60;return m+':'+(s<10?'0':'')+s.toFixed(1).replace('.',',');}
-function rank(total,par){return total<=par[0]?{n:'Meister',c:'#36b86c'}:total<=par[1]?{n:'Geselle',c:'#17a59b'}:total<=par[2]?{n:'Azubi',c:'#ff7a1a'}:{n:'Praktikant',c:'#e5483b'};}
+function rank(total,par){return total<=par[0]?{n:'Obermonteur',c:'#36b86c'}:total<=par[1]?{n:'Monteur',c:'#17a59b'}:total<=par[2]?{n:'Azubi',c:'#ff7a1a'}:{n:'Praktikant',c:'#e5483b'};}
 function unlocked(i){return true;}
 
 function renderMenu(){
@@ -2353,7 +2353,7 @@ function openBrief(i){
   resetPlayer();S.state='brief';
   $('bNo').textContent=i+1;$('bType').textContent=L.type;$('bAddr').textContent=L.name;$('bNote').textContent=L.note;
   $('bTodo').innerHTML=KINDS.filter(k=>level.counts[k]>0).map(k=>'<li><span class="ico" style="--c:'+KIND[k].col+'">'+svg(k)+'</span><span>'+KIND[k].name+'</span><b>'+level.counts[k]+'</b></li>').join('');
-  $('bPar').innerHTML=['Meister','Geselle','Azubi'].map((n,j)=>'<div><span>'+n+'</span><b>'+fmt(L.par[j])+'</b></div>').join('');
+  $('bPar').innerHTML=['Obermonteur','Monteur','Azubi'].map((n,j)=>'<div><span>'+n+'</span><b>'+fmt(L.par[j])+'</b></div>').join('');
   show('scrBrief');
 }
 $('bBack').onclick=()=>{toMenu();};
