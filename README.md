@@ -35,6 +35,8 @@ Je nach Gesamtzeit gibt es einen Rang:
 
 Die Bestzeiten pro Auftrag speichert der Browser lokal (`localStorage`).
 
+Jeder Auftrag hat außerdem eine eigene **Rangliste** mit den zehn schnellsten Läufen. Schafft eine Zeit es in die Top 10, kann man auf dem Ergebnisbildschirm seinen Namen eintragen. Die Top 3 stehen zusätzlich im Auftragsbriefing. Auch die Rangliste liegt nur im Browser (`localStorage`) und gilt deshalb pro Gerät.
+
 ### Geräte
 
 | Gerät | Tätigkeit |
