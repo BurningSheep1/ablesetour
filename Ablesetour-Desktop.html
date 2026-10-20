@@ -184,6 +184,21 @@ h1{margin:0;font-family:var(--f-display);font-weight:400;font-size:clamp(52px,16
   animation:stamp .45s cubic-bezier(.2,1.6,.4,1) both .25s}
 @keyframes stamp{from{transform:rotate(-12deg) scale(2.4);opacity:0}}
 .record{font-family:var(--f-ui);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+.rk-title{margin:0;font-family:var(--f-ui);font-weight:600;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.rk-form{display:flex;gap:8px}
+.rk-form input{flex:1 1 auto;min-width:0;border:2px solid var(--line);border-radius:12px;padding:10px 12px;background:#fff;color:var(--ink);
+  font-family:var(--f-ui);font-weight:600;font-size:17px}
+.rk-form input:focus{outline:none;border-color:var(--teal)}
+.rk-form .btn{flex:0 0 auto}
+.rk-list{list-style:none;margin:0;padding:0;display:grid;gap:2px;font-size:15px;counter-reset:rk}
+.rk-list li{display:grid;grid-template-columns:2ch 1fr auto;gap:10px;align-items:baseline;padding:3px 6px;border-radius:6px;counter-increment:rk}
+.rk-list li::before{content:counter(rk)".";font-family:var(--f-ui);font-weight:700;color:var(--muted);text-align:right}
+.rk-list li span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rk-list li b{font-family:var(--f-ui);font-size:17px;font-variant-numeric:tabular-nums}
+.rk-list li.me{background:var(--teal);color:#fff}
+.rk-list li.me::before{color:#fff}
+.rk-list li.rk-empty{display:block;padding:3px 0;font-size:14px;color:var(--muted)}
+.rk-list li.rk-empty::before{content:none}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 
@@ -240,6 +255,8 @@ h1{margin:0;font-family:var(--f-display);font-weight:400;font-size:clamp(52px,16
     <hr class="perf">
     <ul class="todo" id="bTodo"></ul>
     <div class="par" id="bPar"></div>
+    <p class="rk-title">Top 3</p>
+    <ol class="rk-list" id="bRank"></ol>
     <div class="btns"><button class="btn ghost" id="bBack">Zurück</button><button class="btn go" id="bGo">Tour starten</button></div>
   </div>
 </section>
@@ -267,6 +284,10 @@ h1{margin:0;font-family:var(--f-display);font-weight:400;font-size:clamp(52px,16
       <dt>Zusammenstöße</dt><dd id="rHits"></dd>
       <dt>Bestzeit</dt><dd id="rBest"></dd>
     </dl>
+    <hr class="perf">
+    <p class="rk-title">Rangliste</p>
+    <form class="rk-form" id="rForm" hidden><input id="rName" maxlength="16" placeholder="Dein Name" autocomplete="off" enterkeyhint="done"><button class="btn go" type="submit">Eintragen</button></form>
+    <ol class="rk-list" id="rRank"></ol>
     <div class="btns"><button class="btn ghost" id="rMenu">Übersicht</button><button class="btn ghost" id="rAgain">Nochmal</button><button class="btn go" id="rNext">Weiter</button></div>
   </div>
 </section>
@@ -575,6 +596,19 @@ const ANIMAL={dog:1,cat:1,rat:1,cow:1,hen:1,goose:1};
 let BEST={};
 try{BEST=JSON.parse(localStorage.getItem('ablesetour.best')||'{}')||{};}catch(e){BEST={};}
 function saveBest(){try{localStorage.setItem('ablesetour.best',JSON.stringify(BEST));}catch(e){}}
+const RANK_MAX=10;
+let RANK={};
+try{RANK=JSON.parse(localStorage.getItem('ablesetour.rank')||'{}')||{};}catch(e){RANK={};}
+function saveRank(){try{localStorage.setItem('ablesetour.rank',JSON.stringify(RANK));}catch(e){}}
+function lastName(){try{return localStorage.getItem('ablesetour.name')||'';}catch(e){return '';}}
+function saveName(n){try{localStorage.setItem('ablesetour.name',n);}catch(e){}}
+function rankList(id){return Array.isArray(RANK[id])?RANK[id]:[];}
+function rankFits(id,t){const l=rankList(id);return l.length<RANK_MAX||t<l[l.length-1].t;}
+function addRank(id,n,t){
+  const e={n,t:Math.round(t*10)/10,d:new Date().toISOString().slice(0,10)};
+  const l=rankList(id).concat(e).sort((a,b)=>a.t-b.t).slice(0,RANK_MAX);
+  RANK[id]=l;saveRank();return l.indexOf(e);
+}
 
 /* ---------- Audio ---------- */
 let AC=null, muted=false;
@@ -2333,6 +2367,12 @@ function show(id){screens.forEach(s=>$(s).hidden=s!==id);}
 function fmt(t){t=Math.max(0,t);const m=Math.floor(t/60),s=t-m*60;return m+':'+(s<10?'0':'')+s.toFixed(1).replace('.',',');}
 function rank(total,par){return total<=par[0]?{n:'Obermonteur',c:'#36b86c'}:total<=par[1]?{n:'Monteur',c:'#17a59b'}:total<=par[2]?{n:'Azubi',c:'#ff7a1a'}:{n:'Praktikant',c:'#e5483b'};}
 function unlocked(i){return true;}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>'&#'+c.charCodeAt(0)+';');}
+function renderRank(el,id,max,me){
+  const l=rankList(id).slice(0,max);
+  el.innerHTML=l.length?l.map((e,j)=>'<li'+(j===me?' class="me"':'')+'><span>'+esc(e.n)+'</span><b>'+fmt(e.t)+'</b></li>').join(''):
+    '<li class="rk-empty">Noch keine Einträge.</li>';
+}
 
 function renderMenu(){
   $('houseList').innerHTML=LEVELS.map((L,i)=>{
@@ -2354,6 +2394,7 @@ function openBrief(i){
   $('bNo').textContent=i+1;$('bType').textContent=L.type;$('bAddr').textContent=L.name;$('bNote').textContent=L.note;
   $('bTodo').innerHTML=KINDS.filter(k=>level.counts[k]>0).map(k=>'<li><span class="ico" style="--c:'+KIND[k].col+'">'+svg(k)+'</span><span>'+KIND[k].name+'</span><b>'+level.counts[k]+'</b></li>').join('');
   $('bPar').innerHTML=['Obermonteur','Monteur','Azubi'].map((n,j)=>'<div><span>'+n+'</span><b>'+fmt(L.par[j])+'</b></div>').join('');
+  renderRank($('bRank'),L.id,3,-1);
   show('scrBrief');
 }
 $('bBack').onclick=()=>{toMenu();};
@@ -2392,6 +2433,13 @@ $('pRestart').onclick=()=>{startCountdown();};
 $('pMenu').onclick=toMenu;
 $('rMenu').onclick=toMenu;
 $('rAgain').onclick=()=>{startCountdown();};
+$('rForm').onsubmit=e=>{
+  e.preventDefault();
+  const n=$('rName').value.trim().slice(0,16);if(!n||S.ranked)return;
+  S.ranked=true;saveName(n);
+  const L=LEVELS[S.idx],at=addRank(L.id,n,S.lastTotal);
+  $('rName').blur();$('rForm').hidden=true;renderRank($('rRank'),L.id,RANK_MAX,at);
+};
 $('rNext').onclick=()=>{const n=S.idx+1;if(n<LEVELS.length){buildLevel(n);openBrief(n);}else toMenu();};
 $('soundBtn').onclick=()=>{muted=!muted;$('soundBtn').textContent=muted?'Ton aus':'Ton an';if(!muted){ac();sfx.done();}};
 document.addEventListener('visibilitychange',()=>{if(document.hidden)pause();});
@@ -2436,6 +2484,7 @@ ab.addEventListener('pointerdown',e=>{e.preventDefault();btnHold=true;ab.classLi
 document.addEventListener('contextmenu',e=>e.preventDefault());
 addEventListener('keydown',e=>{
   const k=e.key.toLowerCase();
+  if(e.target&&e.target.tagName==='INPUT'){if(k==='escape')e.target.blur();return;}
   if(!e.repeat){
     if(S.state==='menu'&&/^[0-9]$/.test(k)){const i=k==='0'?9:+k-1;if(LEVELS[i]&&unlocked(i)){ac();openBrief(i);}return;}
     if(S.state==='brief'){if(k==='enter'){e.preventDefault();ac();startCountdown();return;}if(k==='escape'){toMenu();return;}}
@@ -2446,7 +2495,7 @@ addEventListener('keydown',e=>{
   if(k==='escape'||k==='p'){if(S.state==='pause'){show(null);S.state=S.prevState||'play';}else pause();}
   keys.add(k);if(k.startsWith('arrow'))e.preventDefault();
 });
-addEventListener('keyup',e=>{const k=e.key.toLowerCase();keys.delete(k);if([' ','e','enter'].includes(k))keyHold=false;});
+addEventListener('keyup',e=>{if(e.target&&e.target.tagName==='INPUT')return;const k=e.key.toLowerCase();keys.delete(k);if([' ','e','enter'].includes(k))keyHold=false;});
 function readKeys(){
   let x=0,y=0;
   if(keys.has('a')||keys.has('arrowleft'))x-=1;if(keys.has('d')||keys.has('arrowright'))x+=1;
@@ -2609,7 +2658,12 @@ function finish(){
     $('rRecord').textContent=prev===undefined?'Erste Wertung':'Neuer Rekord';$('rRecord').hidden=!rec;
     const st=$('rStamp');st.textContent=rk.n;st.style.setProperty('--c',rk.c);st.style.animation='none';void st.offsetWidth;st.style.animation='';
     $('rNext').hidden=i>=LEVELS.length-1;
+    S.lastTotal=total;S.ranked=false;
+    const fits=rankFits(L.id,total);
+    $('rForm').hidden=!fits;$('rName').value=lastName();
+    renderRank($('rRank'),L.id,RANK_MAX,-1);
     show('scrResult');
+    if(fits&&DESK)$('rName').focus();
   },700);
 }
 
